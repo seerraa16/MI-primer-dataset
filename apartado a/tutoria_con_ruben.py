@@ -24,7 +24,7 @@ def generate_sample():
         "2do más probable": second_most_probable_planet
     }
 
-dataset = [generate_sample() for _ in range(100)]
+dataset = [generate_sample() for _ in range(300)]
 
 # Crear el DataFrame con el dataset
 df = pd.DataFrame(dataset)
