@@ -67,3 +67,8 @@ plt.plot(X, y_pred, color="red")
 plt.xlabel("Longitud (m)")
 plt.ylabel("Tiempo (s)")
 plt.show()
+
+#analizamos de todos los datos cual es el que mas a salido
+print(df["Planeta más probable"].value_counts())
+print(df["2do más probable"].value_counts())
+
