@@ -27,7 +27,7 @@ for i in range(1903):
     }
     dataset.append(row)
 
-df = pd.read_csv('datos_gravedad.csv')
+df = pd.DataFrame(dataset)
 
 
 colors = {'Tierra': 'blue', 'Saturno': 'red', 'Urano': 'green', 'Neptuno': 'purple'}
