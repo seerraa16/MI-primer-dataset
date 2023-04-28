@@ -1,5 +1,7 @@
 import random
 from faker import Faker
+import pandas as pd
+import matplotlib.pyplot as plt
 
 faker = Faker()
 
@@ -24,4 +26,5 @@ for i in range(1903):
     }
     dataset.append(row)
 
-print(dataset)
+df = pd.read_csv('datos_gravedad.csv')
+
