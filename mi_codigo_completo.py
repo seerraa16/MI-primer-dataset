@@ -8,7 +8,7 @@ accelerations = [9.8, 3.7, 24.8, 9.0, 8.7, 11.0]
 
 dataset = []
 
-for i in range(20):
+for i in range(1903):
     L = random.uniform(0.5, 2.0)
     t = random.uniform(0.3, 0.8)
     planet = random.choice(planets)
