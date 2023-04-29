@@ -34,7 +34,7 @@ print(df.describe())
 
 # Histogramas
 df.hist(column=["Longitud (m)", "Tiempo (s)", "g_calculado (m/s²)"])
-plt.show()
+plt.show() 
 
 # Gráfico de dispersión
 plt.scatter(df["Longitud (m)"], df["Tiempo (s)"])

@@ -17,6 +17,8 @@ for i in range(1903):
     planet = random.choice(planets)
     g = accelerations[planets.index(planet)] + random.uniform(-0.5, 0.5)
     error = random.uniform(0.01, 0.1)
+    most_probable_planet = planets[accelerations.index(min(accelerations, key=lambda x: abs(x - g)))]
+    second_most_probable_planet = planets[accelerations.index(max(accelerations, key=lambda x: abs(x - g)))]
     row = {
         'ID': faker.uuid4(),
         'L (m)': round(L, 2),
@@ -24,6 +26,7 @@ for i in range(1903):
         'Planet': planet,
         'g (m/s^2)': round(g, 2),
         'Error': round(error, 2)
+    
     }
     dataset.append(row)
 
