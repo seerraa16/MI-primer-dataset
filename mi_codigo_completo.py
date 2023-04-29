@@ -19,7 +19,7 @@ def generate_sample():
         error = random.uniform(0.01, 0.1)
         most_probable_planet = planets[accelerations.index(min(accelerations, key=lambda x: abs(x - g)))]
         second_most_probable_planet = planets[accelerations.index(max(accelerations, key=lambda x: abs(x - g)))]
-        row = {
+        return {
             'ID': faker.uuid4(),
             'L (m)': round(L, 2),
             't (s)': round(t, 2),
@@ -28,7 +28,7 @@ def generate_sample():
             'Error': round(error, 2)
         
         }
-    dataset.append(row)
+        dataset.append(generate_sample())
 
 df = pd.DataFrame(dataset)
 
