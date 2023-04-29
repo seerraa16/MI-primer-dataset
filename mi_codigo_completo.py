@@ -2,50 +2,53 @@ import random
 from faker import Faker
 import pandas as pd
 import matplotlib.pyplot as plt
-from pandas.plotting import scatter_matrix
 
 faker = Faker()
 
 planets = ['Tierra', 'Marte', 'Júpiter', 'Saturno', 'Urano', 'Neptuno']
 accelerations = [9.8, 3.7, 24.8, 9.0, 8.7, 11.0]
 
-dataset = []
 def generate_sample():
-    for i in range(1903):
-        L = random.uniform(0.5, 2.0)
-        t = random.uniform(0.3, 0.8)
-        planet = random.choice(planets)
-        g = accelerations[planets.index(planet)] + random.uniform(-0.5, 0.5)
-        error = random.uniform(0.01, 0.1)
-        most_probable_planet = planets[accelerations.index(min(accelerations, key=lambda x: abs(x - g)))]
-        second_most_probable_planet = planets[accelerations.index(max(accelerations, key=lambda x: abs(x - g)))]
-        return {
-            'ID': faker.uuid4(),
-            'L (m)': round(L, 2),
-            't (s)': round(t, 2),
-            'Planet': planet,
-            'g (m/s^2)': round(g, 2),
-            'Error': round(error, 2)
+    
+    L = random.uniform(0.5, 2.0)
+    t = random.uniform(0.3, 0.8)
+    planet = random.choice(planets)
+    g = accelerations[planets.index(planet)] + random.uniform(-0.5, 0.5)
+    error = random.uniform(0.01, 0.1)
+    most_probable_planet = planets[accelerations.index(min(accelerations, key=lambda x: abs(x - g)))]
+    second_most_probable_planet = planets[accelerations.index(max(accelerations, key=lambda x: abs(x - g)))]
+    return {
+        'ID': faker.uuid4(),
+        'L (m)': round(L, 2),
+        't (s)': round(t, 2),
+        'Planet': planet,
+        'g (m/s^2)': round(g, 2),
+        'Error': round(error, 2)
         
-        }
-        dataset.append(generate_sample())
-
+    }
+dataset = [generate_sample() for _ in range(1903)] #1903 datos por el atleti.   
 df = pd.DataFrame(dataset)
 
 
-colors = {'Tierra': 'blue', 'Saturno': 'red', 'Urano': 'green', 'Neptuno': 'purple'}
 
-scatter_matrix(df, figsize=(10, 10), diagonal='kde', color=df['Planeta'].apply(lambda x: colors[x]))
-plt.show() #Creamos una matriz de dispersion
-# creacion de histogramas
-fig, axes = plt.subplots(nrows=2, ncols=2, figsize=(10, 10))
+print(df.describe())
 
-for ax, col in zip(axes.flatten(), df.columns[:-1]):
-    ax.hist(df[col], bins=10, color=colors[df['Planeta']], alpha=0.5)
-    ax.set_xlabel(col)
-    ax.set_ylabel('Frecuencia')
 
-plt.tight_layout()
+#codificar etiquetas de planetas
+from sklearn.preprocessing import LabelEncoder
+label_encoder = LabelEncoder()
+df['Planet (code)'] = label_encoder.fit_transform(df['Planet'])
+# Gráfico de dispersión
+plt.scatter(df["Longitud (m)"], df["Tiempo (s)"])
+plt.xlabel("Longitud (m)")
+plt.ylabel("Tiempo (s)")
 plt.show()
+# Histogramas
+df.hist(column=["Longitud (m)", "Tiempo (s)", "g_calculado (m/s²)"])
+plt.show() 
+# Regresión lineal
+from sklearn.linear_model import LinearRegression
+#datos que mas han salido tras el analisis
+print(df.corr())
 
 
