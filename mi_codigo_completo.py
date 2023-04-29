@@ -39,7 +39,7 @@ from sklearn.preprocessing import LabelEncoder
 label_encoder = LabelEncoder()
 df['Planet (code)'] = label_encoder.fit_transform(df['Planet'])
 # Gráfico de dispersión
-plt.scatter(df["Longitud (m)"], df["Tiempo (s)"])
+plt.scatter(df["L (m)"], df["t (s)"])
 plt.xlabel("Longitud (m)")
 plt.ylabel("Tiempo (s)")
 plt.show()
