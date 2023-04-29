@@ -2,6 +2,7 @@ import random
 from faker import Faker
 import pandas as pd
 import matplotlib.pyplot as plt
+import numpy as np
 
 faker = Faker()
 
@@ -46,9 +47,20 @@ plt.show()
 # Histogramas
 df.hist(column=["L (m)", "t (s)", "g (m/s^2)"])
 plt.show() 
-# Regresión lineal
-from sklearn.linear_model import LinearRegression
-#datos que mas han salido tras el analisis
-print(df.corr())
+x = df["L (m)"]
+y = df["t (s)"]
+
+# Ajustar la línea de regresión
+coef = np.polyfit(x, y, 1)
+line = np.poly1d(coef)
+
+# Graficar los datos y la línea de regresión
+plt.scatter(x, y)
+plt.plot(x, line(x), color='red')
+plt.xlabel("Longitud (m)")
+plt.ylabel("Tiempo (s)")
+plt.show()
+
+
 
 
