@@ -44,7 +44,7 @@ plt.xlabel("Longitud (m)")
 plt.ylabel("Tiempo (s)")
 plt.show()
 # Histogramas
-df.hist(column=["Longitud (m)", "Tiempo (s)", "g_calculado (m/s²)"])
+df.hist(column=["L (m)", "t (s)", "g (m/s^2)"])
 plt.show() 
 # Regresión lineal
 from sklearn.linear_model import LinearRegression
