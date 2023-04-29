@@ -60,6 +60,8 @@ plt.plot(x, line(x), color='red')
 plt.xlabel("Longitud (m)")
 plt.ylabel("Tiempo (s)")
 plt.show()
+#decirt los datos que mas salen
+print(df['Planet'].value_counts())
 
 
 
